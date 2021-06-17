@@ -1,0 +1,91 @@
+
+O script run_analysis.R executa a preparação dos dados e, em seguida, segue as 5 etapas necessárias, conforme descrito na definição do projeto do curso.
+
+Baixe o conjunto de dados
+Conjunto de dados baixado e extraído na pasta chamada UCI HAR Dataset 
+
+Atribuir cada dado a variáveis
+features <- features.txt: 561 linhas, 2 colunas
+Os recursos selecionados para este banco de dados vêm dos sinais brutos 3-axiais do acelerômetro e do giroscópio tAcc-XYZ e tGyro-XYZ.
+atividades <- activity_labels.txt: 6 linhas, 2 colunas
+Lista de atividades realizadas quando as medições correspondentes foram feitas e seus códigos (rótulos)
+subject_test <- test / subject_test.txt: 2947 linhas, 1 coluna
+contém dados de teste de 9/30 sujeitos de teste voluntários sendo observados
+x_test <- test / X_test.txt: 2947 linhas, 561 colunas
+contém dados de teste de recursos registrados
+y_test <- test / y_test.txt: 2947 linhas, 1 colunas
+contém dados de teste de rótulos de código de atividades
+subject_train <- test / subject_train.txt: 7352 linhas, 1 coluna
+contém dados do trem de 21/30 voluntários sendo observados
+x_train <- test / X_train.txt: 7352 linhas, 561 colunas
+contém dados de trem de recursos registrados
+y_train <- test / y_train.txt: 7352 linhas, 1 colunas
+contém dados de trem de etiquetas de código de atividades
+
+Assign each data to variables
+features <- features.txt : 561 rows, 2 columns
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
+activities <- activity_labels.txt : 6 rows, 2 columns
+List of activities performed when the corresponding measurements were taken and its codes (labels)
+subject_test <- test/subject_test.txt : 2947 rows, 1 column
+contains test data of 9/30 volunteer test subjects being observed
+x_test <- test/X_test.txt : 2947 rows, 561 columns
+contains recorded features test data
+y_test <- test/y_test.txt : 2947 rows, 1 columns
+contains test data of activities’code labels
+subject_train <- test/subject_train.txt : 7352 rows, 1 column
+contains train data of 21/30 volunteer subjects being observed
+x_train <- test/X_train.txt : 7352 rows, 561 columns
+contains recorded features train data
+y_train <- test/y_train.txt : 7352 rows, 1 columns
+contains train data of activities’code labels
+
+Mescla o treinamento e os conjuntos de teste para criar um conjunto de dados
+X (10299 linhas, 561 colunas) é criado mesclando x_train e x_test usando a função rbind ()
+Y (10299 linhas, 1 coluna) é criado mesclando y_train e y_test usando a função rbind ()
+Assunto (10299 linhas, 1 coluna) é criado mesclando subject_train e subject_test usando a função rbind ()
+Merged_Data (10299 linhas, 563 colunas) é criado mesclando Assunto, Y e X usando a função cbind ()
+
+Extrai apenas as medições da média e do desvio padrão para cada medição
+TidyData (10299 linhas, 88 colunas) é criado por subconjuntos Merged_Data, selecionando apenas colunas: assunto, código e as medições na média e desvio padrão (std) para cada medição
+
+Usa nomes de atividades descritivos para nomear as atividades no conjunto de dados
+Números inteiros na coluna de código do TidyData substituídos pela atividade correspondente tirada da segunda coluna da variável de atividades
+
+Rotula apropriadamente o conjunto de dados com nomes de variáveis ​​descritivos
+coluna de código em TidyData renomeada para atividades
+Todos os nomes da coluna de Acc in substituídos por Acelerômetro
+Todos os giroscópios do nome da coluna são substituídos por giroscópio
+Todos os BodyBody no nome da coluna substituídos por Body
+Nome da coluna All Mag in substituído por Magnitude
+Todos começam com o caractere f no nome da coluna substituído por Frequência
+Todos começam com o caractere t no nome da coluna substituído por Tempo
+
+A partir do conjunto de dados na etapa 4, cria um segundo conjunto de dados independente e organizado com a média de cada variável para cada atividade e cada assunto
+FinalData (180 linhas, 88 colunas) é criado sumarizando TidyData tomando as médias de cada variável para cada atividade e cada assunto, depois agrupado por assunto e atividade.
+Exporte FinalData para o arquivo FinalData.txt.
+
+Merges the training and the test sets to create one data set
+X (10299 rows, 561 columns) is created by merging x_train and x_test using rbind() function
+Y (10299 rows, 1 column) is created by merging y_train and y_test using rbind() function
+Subject (10299 rows, 1 column) is created by merging subject_train and subject_test using rbind() function
+Merged_Data (10299 rows, 563 column) is created by merging Subject, Y and X using cbind() function
+
+Extracts only the measurements on the mean and standard deviation for each measurement
+TidyData (10299 rows, 88 columns) is created by subsetting Merged_Data, selecting only columns: subject, code and the measurements on the mean and standard deviation (std) for each measurement
+
+Uses descriptive activity names to name the activities in the data set
+Entire numbers in code column of the TidyData replaced with corresponding activity taken from second column of the activities variable
+
+Appropriately labels the data set with descriptive variable names
+code column in TidyData renamed into activities
+All Acc in column’s name replaced by Accelerometer
+All Gyro in column’s name replaced by Gyroscope
+All BodyBody in column’s name replaced by Body
+All Mag in column’s name replaced by Magnitude
+All start with character f in column’s name replaced by Frequency
+All start with character t in column’s name replaced by Time
+
+From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
+FinalData (180 rows, 88 columns) is created by sumarizing TidyData taking the means of each variable for each activity and each subject, after groupped by subject and activity.
+Export FinalData into FinalData.txt file.
